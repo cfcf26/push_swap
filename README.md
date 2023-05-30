@@ -47,3 +47,22 @@ Thanks to the checker program, you will be able to check whether the list of ins
 - Description: Execute the sorting instructions
 
 The bonus part will only be assessed if the mandatory part is PERFECT. Perfect means the mandatory part has been integrally done and works without malfunctioning. If you have not passed ALL the mandatory requirements, your bonus part will not be evaluated at all.
+
+
+# Hourglass Algorithm (모래시계 알고리즘)
+
+The Hourglass Algorithm is a unique sorting method that works with two stacks, stack A and stack B, and is named so because of the hourglass shape formed during the sorting process. Here's a step-by-step guide on how it works:
+
+1. **Indexing**: The initial inputs are indexed, with the smallest number receiving the index of 0. For example, the inputs [1, 4, 5, 2, 9, 6] would be indexed as [0, 2, 3, 1, 5, 4]【5†source】.
+
+2. **Sorting Stack A**: With the indexed values, Stack A is sorted. If the top value of Stack A is larger than the median index, it is flipped using the operation `ra`. Once Stack A's size reaches 3, it is sorted. The sorted Stack A then receives an additional value using the operation `sa` to maintain ascending order【6†source】【7†source】【8†source】【9†source】.
+
+3. **Moving from Stack A to Stack B**: The indexed values from Stack A are transferred to Stack B, creating an hourglass shape. This process uses a variable `i` starting from 0 and incrementing up to the array size, and a constant called `chunk`. If the top value of Stack A (`top`) is smaller than `i`, it is transferred to Stack B. If `top` is larger than `i` but smaller than `i + chunk`, it is transferred to Stack B and reversed. If `top` is larger than `i + chunk`, it is flipped using `ra`【10†source】【11†source】【21†source】【22†source】.
+
+4. **Deciding between `ra` and `rra`**: If the value is larger than the index plus the chunk value, there are two options: move the top (head) value to the bottom (tail) using `ra`, or move the bottom (tail) value to the top (head) using `rra`. The implementation can vary based on preference, and in one case, the option that results in a smaller value appearing first was chosen【23†source】.
+
+5. **Moving from Stack B back to Stack A**: From Stack B, the values are sent back to Stack A in descending order of their index, effectively sorting them in ascending order【12†source】【13†source】【24†source】.
+
+6. **Understanding the Chunk Value**: The chunk value, similar to a pivot in quicksort, represents a margin of error. Given a large number of integers to sort, the first objective is to make it easy to pick out values from the top and bottom of the stack. Without chunking, the smallest value and the next smallest value would need to be placed at the top and bottom, requiring extensive traversing of Stack A. By allowing a margin of error based on the number of input values, values are approximately placed at the top and bottom, reducing the number of operations required. However, if this margin of error is incorrectly set, it can result in an excessive number of commands【25†source】.
+
+This algorithm is a great way to sort values in an efficient manner, especially when working with stacks. With the right chunk value, it can perform the sorting task using a minimal number of operations, making it a great choice for many sorting tasks.
